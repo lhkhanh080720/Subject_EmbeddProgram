@@ -1,0 +1,4 @@
+State.c:11:6:ledCtrl	16	static
+State.c:16:6:SW	16	static
+State.c:26:6:initState	4	static
+State.c:31:6:stateSystemUpdate	8	static

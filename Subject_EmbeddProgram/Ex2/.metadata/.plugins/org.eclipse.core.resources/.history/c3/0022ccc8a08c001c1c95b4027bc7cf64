@@ -1,0 +1,21 @@
+
+
+/**
+ * main.c
+ */
+#include "include.h"
+
+int main(void)
+{
+    SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);   //40MHz
+    Config_Led();
+    Config_SW();
+    uint8_t j = 0;
+    while(1)
+    {
+        j = (GPIOPinRead(SWPort, SW2) ? LedG : 0);
+        GPIOPinWrite(LedPort, LedG , j);
+//        j = (!GPIOPinRead(SWPort, SW2) ? LedG : 0);
+//        GPIOPinWrite(LedPort, LedG , j);
+    }
+}

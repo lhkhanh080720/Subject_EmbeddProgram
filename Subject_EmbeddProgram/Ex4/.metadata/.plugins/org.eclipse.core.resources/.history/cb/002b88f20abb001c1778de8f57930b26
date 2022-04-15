@@ -1,0 +1,76 @@
+/*
+ * State.c
+ *
+ *  Created on: Apr 13, 2022
+ *      Author: USER
+ */
+#include "State.h"
+#include "main.h"
+
+static state_t State
+
+void ledCtrl(uint8_t status)
+{
+	HAL_GPIO_WritePin(LEDR_GPIO_Port, LEDR_Pin, status);
+}
+
+void initState(void)
+{
+	State = S0;
+}
+
+void stateSystemUpdate(void)
+{
+	switch(State)
+	{
+		case S0:
+		{
+			if(SW() == SW_PRESS)
+				State = S1;
+			else if(SW() == SW_NONPRESS)
+				State = S0;
+			break;
+		}
+		case S1:
+		{
+			if(SW() == SW_PRESS)
+				State = S1;
+			else if(SW() == SW_NONPRESS)
+				State = S2;
+			break;
+		}
+		case S2:
+		{
+			if(SW() == SW_PRESS)
+				State = S3;
+			else if(SW() == SW_NONPRESS)
+				State = S2;
+			break;
+		}
+		case S3:
+		{
+			if(SW() == SW_PRESS)
+				State = S3;
+			else if(SW() == SW_NONPRESS)
+				State = S0;
+			break;
+		}
+	}
+
+	switch(State)
+	{
+		case S0:
+		case S3:
+		{
+			ledCtrl(OFF);
+			break;
+		}
+		case S1:
+		case S2:
+		{
+			ledCtrl(ON);
+			break;
+		}	
+	}
+}
+

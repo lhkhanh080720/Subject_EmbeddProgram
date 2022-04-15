@@ -1,0 +1,25 @@
+/*
+ * GPIO.c
+ *
+ *  Created on: Feb 13, 2022
+ *      Author: USER
+ */
+#include "../include.h"
+#include "GPIO.h"
+
+void Config_Led()
+{
+    SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOF);
+    GPIOPinTypeGPIOOutput(GPIO_PORTF_BASE, LedR | LedG | LedB);
+    GPIOPinWrite(GPIO_PORTF_BASE, LedR | LedG | LedB , 0);
+}
+
+int OnOff_Led(uint8_t led)
+{
+    static uint8_t i;
+    i = (!i ? led : 0);
+    GPIOPinWrite(LedPort, led , i);
+    SysCtlDelay(2000000);
+}
+
+

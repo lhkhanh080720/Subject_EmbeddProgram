@@ -1,0 +1,18 @@
+
+
+/**
+ * main.c
+ */
+#include "include.h"
+
+int main(void)
+{
+    SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);   //40MHz
+    Config_Led();
+
+    while(1)
+    {
+        OnOff_Led(LedR);
+    }
+	return 0;
+}

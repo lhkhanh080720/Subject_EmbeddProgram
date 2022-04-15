@@ -1,0 +1,19 @@
+/*
+ * GPIO.h
+ *
+ *  Created on: Feb 13, 2022
+ *      Author: USER
+ */
+
+#ifndef GPIO_GPIO_H_
+#define GPIO_GPIO_H_
+
+#define LedPort     GPIO_PORTF_BASE
+#define LedR        GPIO_PIN_1
+#define LedB        GPIO_PIN_2
+#define LedG        GPIO_PIN_3
+
+extern void Config_Led();
+extern void OnOff_Led();
+
+#endif /* GPIO_GPIO_H_ */

@@ -1,0 +1,31 @@
+
+
+/**
+ * main.c
+ */
+#include "include.h"
+
+int main(void)
+{
+    SysCtlClockSet(SYSCTL_SYSDIV_4|SYSCTL_USE_PLL|SYSCTL_XTAL_16MHZ|SYSCTL_OSC_MAIN);
+    Config_Led();
+    Config_SW();
+    Config_UART();
+    while(1)
+    {
+        Config_SW();
+        Config_Led();
+        Config_UART();
+        while(1)
+        {
+            while(GPIOPinRead(SWPort, SW1));
+            if(!GPIOPinRead(SWPort, SW2))
+            {
+                GPIOPinWrite(LedPort, LedR , LedR);
+                UARTCharPut(UART0_BASE, 'P');
+                while(!GPIOPinRead(SWPort, SW2));
+            }
+            UARTCharPut(UART0_BASE, 'R');
+        }
+    }
+}
